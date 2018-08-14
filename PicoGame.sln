@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PicoGame", "PicoGame\PicoGame.vcxproj", "{99C5C268-543B-4170-8B02-DBACE1C07219}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PicoEngine", "PicoEngine\PicoEngine.vcxproj", "{095B08C7-43BC-4911-9522-D835C81BD215}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{99C5C268-543B-4170-8B02-DBACE1C07219}.Release|x64.Build.0 = Release|x64
 		{99C5C268-543B-4170-8B02-DBACE1C07219}.Release|x86.ActiveCfg = Release|Win32
 		{99C5C268-543B-4170-8B02-DBACE1C07219}.Release|x86.Build.0 = Release|Win32
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Debug|x64.ActiveCfg = Debug|x64
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Debug|x64.Build.0 = Debug|x64
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Debug|x86.ActiveCfg = Debug|Win32
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Debug|x86.Build.0 = Debug|Win32
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Release|x64.ActiveCfg = Release|x64
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Release|x64.Build.0 = Release|x64
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Release|x86.ActiveCfg = Release|Win32
+		{095B08C7-43BC-4911-9522-D835C81BD215}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
