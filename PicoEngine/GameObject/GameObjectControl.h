@@ -10,16 +10,17 @@ namespace PicoEngine
 		virtual ~GameObjectControl();
 	};
 
-	template<typename T>
-	T* CreateGameObject()
+	template<class T, class... Args>
+	T* CreateGameObject(Args... args)
 	{
-		T* ret = new T();
+		T* ret = new T( args... );
 		return ret;
 	}
 
-	template<typename T>
-	yBool DestoryGameObject( T* _obj )
+	template<class T>
+	bool DestoryGameObject( T* _obj )
 	{
 		delete _obj;
+		return true;
 	}
 }

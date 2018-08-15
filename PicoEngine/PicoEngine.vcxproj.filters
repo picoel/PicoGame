@@ -12,5 +12,6 @@
     <ClInclude Include="GameObject\GameObjectControl.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Util\ClassID.h" />
   </ItemGroup>
 </Project>
