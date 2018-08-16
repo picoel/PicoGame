@@ -1,5 +1,5 @@
-#include <cstdint>
 #pragma once
+#include <cstdint>
 
 namespace PicoEngine
 {

@@ -13,5 +13,8 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Util\ClassID.h" />
+    <ClInclude Include="Util\Singleton.h" />
+    <ClInclude Include="Util\List.h" />
+    <ClInclude Include="Util\Mutex.h" />
   </ItemGroup>
 </Project>

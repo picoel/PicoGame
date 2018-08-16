@@ -123,6 +123,9 @@
     <ClInclude Include="Util\ClassID.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\GameObjectControl.h" />
+    <ClInclude Include="Util\List.h" />
+    <ClInclude Include="Util\Mutex.h" />
+    <ClInclude Include="Util\Singleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
