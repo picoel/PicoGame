@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 
+#include "PicoEngine/PicoEngine.h"
 #include "PicoEngine/GameObject/GameObjectControl.h"
 #include "PicoEngine/Util/ClassID.h"
 
@@ -25,13 +26,7 @@ public:
 
 	virtual void Update() override
 	{
-		std::cout << "Frm :" << m_count << std::endl;
-		++m_count;
-
-		if( 30 < m_count )
-		{
-			DestoryGameObject( this );
-		}
+		std::cout << GetDeltaTime() << std::endl;
 	}
 
 private:
@@ -40,12 +35,13 @@ private:
 
 int main()
 {
-	Singleton<GameObjectControl>::CreateInstance();
-	GameObjectControl* pcControl = Singleton<GameObjectControl>::GetInstance();
+	Singleton<Manager>::CreateInstance();
+	Manager* pcManager = Singleton<Manager>::GetInstance();
+
 	TestObject* pcObj = CreateGameObject<TestObject>( "Test", ClassID<TestObject>::Get() );
 	while( true )
 	{
-		pcControl->Update();
+		pcManager->MainLoop();
 	}
     return 0;
 }
