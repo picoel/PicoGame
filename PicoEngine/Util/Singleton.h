@@ -1,8 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <cassert>
-
 namespace PicoEngine
 {
 	template<class T>
@@ -10,7 +7,7 @@ namespace PicoEngine
 	{
 	public:
 		template<class... Args>
-		static void CreateInstance(Args... args)
+		static void CreateInstance(Args&&... args)
 		{
 			assert( s_pInstance == nullptr );
 			if( s_pInstance != nullptr )

@@ -1,12 +1,4 @@
 #pragma once
-#include <algorithm>
-#include "PicoEngine/Util/Singleton.h"
-#include "PicoEngine/Util/ClassID.h"
-#include "PicoEngine/Util/List.h"
-#include "PicoEngine/Util/Mutex.h"
-#include "PicoEngine/System/System.h"
-#include "PicoEngine/GameObject/GameObjectControl.h"
-#include "PicoEngine/Time/DeltaTime.h"
 
 namespace PicoEngine
 {
@@ -27,6 +19,7 @@ namespace PicoEngine
 		{
 			for( auto& rpcSystem : m_pcSystemMap )
 			{
+
 				delete rpcSystem.second;
 			}
 			m_pcSystemMap.clear();
@@ -39,7 +32,8 @@ namespace PicoEngine
 		{
 			{
 				shared_lock<shared_mutex> lock( m_mutexSystemMap );
-				std::for_each( m_pcSystemMap.begin(), m_pcSystemMap.end(), []( auto& rstPair )
+				std::for_each( m_pcSystemMap.begin(), m_pcSystemMap.end(),
+					[]( auto& rstPair )
 					{
 						if( rstPair.second )
 						{
@@ -59,7 +53,8 @@ namespace PicoEngine
 
 			{
 				shared_lock<shared_mutex> lock( m_mutexSystemMap );
-				std::for_each( m_pcSystemMap.begin(), m_pcSystemMap.end(), []( auto& rstPair )
+				std::for_each( m_pcSystemMap.begin(), m_pcSystemMap.end(),
+					[]( auto& rstPair )
 					{
 						if( rstPair.second )
 						{
@@ -72,7 +67,7 @@ namespace PicoEngine
 		}
 
 		template<class T, class... Args>
-		void AddSystem( Args... args )
+		void AddSystem( Args&&... args )
 		{
 			lock_guard<shared_mutex> lock( m_mutexSystemMap );
 
@@ -81,7 +76,7 @@ namespace PicoEngine
 			assert( itFind == m_pcSystemMap.end() );
 			if( itFind != m_pcSystemMap.end() )
 			{
-				delete itFind->second;
+				SafeDelete( itFind->second );
 			}
 
 			m_pcSystemMap[id] = new T( args... );

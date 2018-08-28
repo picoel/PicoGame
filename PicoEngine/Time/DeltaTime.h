@@ -1,7 +1,5 @@
 #pragma once
 #include <chrono>
-#include "PicoEngine/util/Type.h"
-#include "PicoEngine/System/System.h"
 
 namespace PicoEngine
 {

@@ -13,6 +13,8 @@ namespace PicoEngine
 	using uint32 = uint_fast32_t;
 	using uint64 = uint_fast64_t;
 
+	using usize = uint_fast64_t;
+
 	using float32 = float;
 	using float64 = double;
 }

@@ -5,16 +5,19 @@
 #include <iostream>
 #include <string>
 
-#include "PicoEngine/PicoEngine.h"
-#include "PicoEngine/GameObject/GameObjectControl.h"
-#include "PicoEngine/Util/ClassID.h"
+#include "PicoEngine/Include.h"
 
 using namespace PicoEngine;
+
+namespace
+{
+	std::string strTest( "Test" );
+}
 
 class TestObject : public GameObject
 {
 public:
-	TestObject( std::string _string, ClassIDType _value )
+	TestObject( const std::string& _string, ClassIDType _value )
 		: m_count(0)
 	{
 		std::cout << "TestObject" << _string << _value << std::endl;
@@ -26,7 +29,16 @@ public:
 
 	virtual void Update() override
 	{
-		std::cout << GetDeltaTime() << std::endl;
+		++m_count;
+		std::cout << m_count << std::endl;
+		if( m_count == 20 )
+		{
+			CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
+		}
+		if( m_count == 30 )
+		{
+			SuicideGameObject( this );
+		}
 	}
 
 private:
@@ -38,7 +50,7 @@ int main()
 	Singleton<Manager>::CreateInstance();
 	Manager* pcManager = Singleton<Manager>::GetInstance();
 
-	TestObject* pcObj = CreateGameObject<TestObject>( "Test", ClassID<TestObject>::Get() );
+	GameObjectHandle<TestObject> pcObj = CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
 	while( true )
 	{
 		pcManager->MainLoop();

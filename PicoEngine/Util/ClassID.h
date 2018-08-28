@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdint>
 
 namespace PicoEngine
 {
@@ -12,7 +11,6 @@ namespace PicoEngine
 		const static std::uint8_t sc_uDummy;
 
 	public:
-		using ClassIDType = std::uintptr_t;
 		static ClassIDType Get(){ return reinterpret_cast<ClassIDType>( &sc_uDummy ); }
 	};
 

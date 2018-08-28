@@ -1,8 +1,4 @@
 #pragma once
-#include "PicoEngine/Util/List.h"
-#include "PicoEngine/Util/Mutex.h"
-#include "PicoEngine/Util/Singleton.h"
-#include "PicoEngine/GameObject/GameObject.h"
 
 namespace PicoEngine
 {
@@ -23,7 +19,7 @@ namespace PicoEngine
 		{
 			for( auto& rpcObj : m_pcObjList )
 			{
-				delete rpcObj;
+				SafeDelete( rpcObj );
 			}
 		}
 
@@ -78,7 +74,7 @@ namespace PicoEngine
 				GameObject* pcObj = m_pcDelObjQue.front();
 				m_pcDelObjQue.pop_front();
 				m_pcObjList.remove( pcObj );
-				delete pcObj;
+				SafeDelete( pcObj );
 			}
 		}
 
@@ -91,43 +87,4 @@ namespace PicoEngine
 		deque<GameObject*> m_pcDelObjQue;
 		mutex m_mutexDelObjQue;
 	};
-
-	template<class T, class... Args>
-	T* CreateGameObject(Args... args)
-	{
-		T* ret = new T( args... );
-
-		GameObjectControl* pcControl = Singleton<GameObjectControl>::GetInstance();
-		if( pcControl )
-		{
-			pcControl->AddRequestGameObject( ret );
-		}
-
-		return ret;
-	}
-
-	template<class T>
-	bool DestoryGameObject( T* _obj )
-	{
-		if( _obj == nullptr )
-		{
-			return false;
-		}
-
-		GameObjectControl* pcControl = Singleton<GameObjectControl>::GetInstance();
-		if( pcControl )
-		{
-			pcControl->RemoveRequestObject( _obj );
-		}
-
-		return true;
-	}
-
-	template<class T>
-	bool SafeDestroyGameObject( T*& _obj )
-	{
-		DestoryGameObject( _obj );
-		_obj = nullptr;
-		return true;
-	}
 }

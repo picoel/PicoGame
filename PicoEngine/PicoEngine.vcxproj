@@ -39,13 +39,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -122,6 +122,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Component\Component.h" />
+    <ClInclude Include="Component\ComponentLink.h" />
+    <ClInclude Include="GameObject\GameObjectFunc.h" />
+    <ClInclude Include="GameObject\GameObjectHandle.h" />
+    <ClInclude Include="Include.h" />
+    <ClInclude Include="Memory\Allocator.h" />
+    <ClInclude Include="Memory\MemoryFunc.h" />
     <ClInclude Include="PicoEngine.h" />
     <ClInclude Include="System\System.h" />
     <ClInclude Include="Time\DeltaTime.h" />
