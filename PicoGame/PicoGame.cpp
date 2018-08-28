@@ -18,7 +18,6 @@ class TestObject : public GameObject
 {
 public:
 	TestObject( const std::string& _string, ClassIDType _value )
-		: m_count(0)
 	{
 		std::cout << "TestObject" << _string << _value << std::endl;
 	}
@@ -29,20 +28,8 @@ public:
 
 	virtual void Update() override
 	{
-		++m_count;
-		std::cout << m_count << std::endl;
-		if( m_count == 20 )
-		{
-			CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
-		}
-		if( m_count == 30 )
-		{
-			SuicideGameObject( this );
-		}
+		std::cout << GetDeltaTime() << std::endl;
 	}
-
-private:
-	std::uint32_t m_count;
 };
 
 int main()

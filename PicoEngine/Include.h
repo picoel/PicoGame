@@ -24,6 +24,6 @@
 #include "PicoEngine/GameObject/GameObjectControl.h"
 #include "PicoEngine/GameObject/GameObjectFunc.h"
 
-#include "PicoEngine/Time/DeltaTime.h"
+#include "PicoEngine/System/Time.h"
 
 #include "PicoEngineCore/Manager.h"

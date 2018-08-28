@@ -129,7 +129,7 @@
     <ClInclude Include="Include.h" />
     <ClInclude Include="Memory\Allocator.h" />
     <ClInclude Include="PicoEngine.h" />
-    <ClInclude Include="Time\DeltaTime.h" />
+    <ClInclude Include="System\Time.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\GameObjectControl.h" />
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace PicoEngine
 			return false;
 		}
 
-		pcManager->RegisterSystem<DeltaTime>();
+		pcManager->RegisterSystem<Time>();
 		pcManager->RegisterSystem<GameObjectControl>();
 
 		return true;
@@ -22,5 +22,11 @@ namespace PicoEngine
 	{
 		Singleton<Manager>::DestoryInstance();
 		return true;
+	}
+
+	float64 GetDeltaTime()
+	{
+		const Time* pcTime = GetSystem<Time>();
+		return pcTime->GetDeltaTime<std::chrono::microseconds>();
 	}
 }

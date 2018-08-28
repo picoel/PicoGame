@@ -10,6 +10,4 @@ namespace PicoEngine
 
 		virtual void Update() = 0;
 	};
-
-
 }
