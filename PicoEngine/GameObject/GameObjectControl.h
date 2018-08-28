@@ -1,12 +1,11 @@
 #pragma once
+#include "PicoEngineCore/System/System.h"
 
 namespace PicoEngine
 {
-	class GameObjectControl
+	class GameObjectControl : public ISystem
 	{
-		friend Singleton<GameObjectControl>;
-
-	private:
+	public:
 		GameObjectControl()
 			: m_pcObjList()
 			, m_pcAddObjQue()
@@ -37,7 +36,9 @@ namespace PicoEngine
 			m_pcDelObjQue.push_back( _pObj );
 		}
 
-		void Update()
+		virtual void LoopFirst() override {}
+
+		virtual void LoopMiddle() override
 		{
 			DeleteObject();
 			AddObject();
@@ -53,6 +54,8 @@ namespace PicoEngine
 				rpcObj->Update();
 			}
 		}
+
+		virtual void LoopLast() override {}
 
 	private:
 		void AddObject()

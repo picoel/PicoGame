@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "PicoEngine/Include.h"
+#include "PicoEngine/PicoEngine.h"
 
 using namespace PicoEngine;
 
@@ -47,7 +47,7 @@ private:
 
 int main()
 {
-	Singleton<Manager>::CreateInstance();
+	Initialize();
 	Manager* pcManager = Singleton<Manager>::GetInstance();
 
 	GameObjectHandle<TestObject> pcObj = CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
@@ -55,6 +55,8 @@ int main()
 	{
 		pcManager->MainLoop();
 	}
+
+	Finalize();
     return 0;
 }
 

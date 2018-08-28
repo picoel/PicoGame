@@ -4,9 +4,6 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{c2e7576e-a7e6-43a7-a73a-4bf15c429373}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Util">
-      <UniqueIdentifier>{de6a5345-2819-4d98-a3b3-a86149a465a4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Time">
       <UniqueIdentifier>{04b30238-21e2-4e89-a99a-13948852ce6a}</UniqueIdentifier>
     </Filter>
@@ -16,9 +13,6 @@
     <Filter Include="Memory">
       <UniqueIdentifier>{231b4792-3598-477e-9db3-9a8db4a4d0e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{e7a6163f-bc21-4bb0-ae66-a50fb0ade850}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -27,26 +21,10 @@
     <ClInclude Include="GameObject\GameObjectControl.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Singleton.h" />
-    <ClInclude Include="Util\ClassID.h">
-      <Filter>Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Mutex.h">
-      <Filter>Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\List.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Time\DeltaTime.h">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="System\System.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="PicoEngine.h" />
-    <ClInclude Include="Util\Type.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Component.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -63,8 +41,5 @@
       <Filter>Memory</Filter>
     </ClInclude>
     <ClInclude Include="Include.h" />
-    <ClInclude Include="Memory\MemoryFunc.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

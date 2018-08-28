@@ -9,6 +9,7 @@ namespace PicoEngine
 		virtual ~ISystem(){}
 
 		virtual void LoopFirst() = 0;
+		virtual void LoopMiddle() = 0;
 		virtual void LoopLast() = 0;
 	};
 }

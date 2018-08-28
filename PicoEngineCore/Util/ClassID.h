@@ -1,8 +1,9 @@
 #pragma once
+#include "PicoEngineCore/Util/Type.h"
 
 namespace PicoEngine
 {
-	using ClassIDType = std::uintptr_t;
+	using ClassIDType = uint64;
 
 	template<class T>
 	class ClassID

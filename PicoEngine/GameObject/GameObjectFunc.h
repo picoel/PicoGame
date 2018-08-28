@@ -1,4 +1,5 @@
 #pragma once
+#include "PicoEngineCore/Manager.h"
 
 namespace PicoEngine
 {
@@ -8,7 +9,7 @@ namespace PicoEngine
 		T* pcObj = new T( args... );
 		GameObjectHandle<T> handle( pcObj );
 
-		GameObjectControl* pcControl = Singleton<GameObjectControl>::GetInstance();
+		GameObjectControl* pcControl = GetSystem<GameObjectControl>();
 		if( pcControl )
 		{
 			pcControl->AddRequestGameObject( *handle );
@@ -20,10 +21,15 @@ namespace PicoEngine
 	template<class T>
 	bool DestoryGameObject( GameObjectHandle<T>& _rHandle )
 	{
-		GameObjectControl* pcControl = Singleton<GameObjectControl>::GetInstance();
+		GameObjectControl* pcControl = GetSystem<GameObjectControl>();
 		if( pcControl )
 		{
 			pcControl->RemoveRequestObject( *_rHandle );
+		}
+		else
+		{
+			GameObject* pcObj = *_rHandle;
+			SafeDelete( pcObj );	// failsafe
 		}
 
 		_rHandle.Invalid();

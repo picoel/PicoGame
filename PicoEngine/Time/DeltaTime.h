@@ -24,6 +24,7 @@ namespace PicoEngine
 			m_preTime = now;
 		}
 
+		virtual void LoopMiddle() override {}
 		virtual void LoopLast() override {}
 
 		float64 GetDeltaTime() const { return m_deltaTime; }
