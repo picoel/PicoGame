@@ -34,12 +34,12 @@
     <ClInclude Include="GameObject\GameObjectHandle.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Memory\Allocator.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Include.h" />
     <ClInclude Include="System\Time.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Allocator.h">
+      <Filter>Memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

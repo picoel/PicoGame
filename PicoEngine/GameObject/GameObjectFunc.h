@@ -4,7 +4,7 @@
 namespace PicoEngine
 {
 	template<class T, class... Args>
-	GameObjectHandle<T> CreateGameObject(Args&&... args)
+	GameObjectHandle<T> CreateGameObject( Args&&... args )
 	{
 		T* pcObj = new T( args... );
 		GameObjectHandle<T> handle( pcObj );
@@ -41,5 +41,17 @@ namespace PicoEngine
 	{
 		GameObjectHandle<T> temp( _pcObj );
 		return DestoryGameObject( temp );
+	}
+
+	template<class T>
+	bool IsValidHandle( const GameObjectHandle<T>& _rHandle )
+	{
+		bool ret = false;
+		const GameObjectControl* pcControl = GetSystem<GameObjectControl>();
+		if( pcControl )
+		{
+			ret = pcControl->IsExistObject( *_rHandle );
+		}
+		return ret;
 	}
 }
