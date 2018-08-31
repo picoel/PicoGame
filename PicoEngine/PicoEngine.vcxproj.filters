@@ -13,6 +13,9 @@
     <Filter Include="System">
       <UniqueIdentifier>{9bd6aea3-ee7f-4b8f-bd95-e15a3b568eba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{a9e68688-b517-44f8-94b5-f1a876282829}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -40,6 +43,15 @@
     </ClInclude>
     <ClInclude Include="Memory\Allocator.h">
       <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneControl.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneFunc.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

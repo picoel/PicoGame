@@ -24,6 +24,10 @@
 #include "PicoEngine/GameObject/GameObjectControl.h"
 #include "PicoEngine/GameObject/GameObjectFunc.h"
 
+#include "PicoEngine/Scene/Scene.h"
+#include "PicoEngine/Scene/SceneControl.h"
+#include "PicoEngine/Scene/SceneFunc.h"
+
 #include "PicoEngine/System/Time.h"
 
 #include "PicoEngineCore/Manager.h"

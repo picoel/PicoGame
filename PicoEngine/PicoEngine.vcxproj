@@ -129,6 +129,9 @@
     <ClInclude Include="Include.h" />
     <ClInclude Include="Memory\Allocator.h" />
     <ClInclude Include="PicoEngine.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneControl.h" />
+    <ClInclude Include="Scene\SceneFunc.h" />
     <ClInclude Include="System\Time.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\GameObjectControl.h" />

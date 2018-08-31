@@ -32,12 +32,28 @@ public:
 	}
 };
 
+class TestScene : public IScene
+{
+public:
+	TestScene(){}
+	virtual ~TestScene(){}
+
+	virtual void Initialize() override
+	{
+		CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
+	}
+
+	virtual void Update()
+	{
+	}
+};
+
 int main()
 {
 	Initialize();
-	Manager* pcManager = Singleton<Manager>::GetInstance();
+	ChangeScene<TestScene>();
 
-	GameObjectHandle<TestObject> pcObj = CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
+	Manager* pcManager = Singleton<Manager>::GetInstance();
 	while( true )
 	{
 		pcManager->MainLoop();

@@ -13,6 +13,7 @@ namespace PicoEngine
 		}
 
 		pcManager->RegisterSystem<Time>();
+		pcManager->RegisterSystem<SceneControl>();
 		pcManager->RegisterSystem<GameObjectControl>();
 
 		return true;
