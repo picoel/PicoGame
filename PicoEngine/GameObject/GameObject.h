@@ -6,16 +6,43 @@ namespace PicoEngine
 	{
 	public:
 		GameObject()
-			: m_bMarkDelete( false )
+			: m_bDestroyed( false )
 		{
 		}
 		virtual ~GameObject(){}
 
 		virtual void Update(){}
 
-		void SetMarkDelete(){ m_bMarkDelete = true; }
-		bool IsMarkedDelete() const{ return m_bMarkDelete; }
+		virtual void Destory(){}
+		void SetDestroyed(){ m_bDestroyed = true; }
+		bool IsDestroyed() const{ return m_bDestroyed; }
 
-		bool m_bMarkDelete;
+	private:
+		bool m_bDestroyed;
 	};
+
+	static inline void DestroyGameObject( GameObject* _rpcObj )
+	{
+		if( _rpcObj == nullptr )
+		{
+			return;
+		}
+
+		if( !_rpcObj->IsDestroyed() )
+		{
+			_rpcObj->Destory();
+			_rpcObj->SetDestroyed();
+		}
+	}
+
+	static inline void SafeDeleteGameObject( GameObject*& _rpcObj )
+	{
+		if( _rpcObj == nullptr )
+		{
+			return;
+		}
+
+		DestroyGameObject( _rpcObj );
+		SafeDelete( _rpcObj );
+	}
 }

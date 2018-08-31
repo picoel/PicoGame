@@ -2,7 +2,7 @@
 #include "PicoEngine/Include.h"
 namespace PicoEngine
 {
-	bool Initialize()
+	static inline bool Initialize()
 	{
 		Singleton<Manager>::CreateInstance();
 		Manager* pcManager = Singleton<Manager>::GetInstance();
@@ -19,13 +19,13 @@ namespace PicoEngine
 		return true;
 	}
 
-	bool Finalize()
+	static inline bool Finalize()
 	{
 		Singleton<Manager>::DestoryInstance();
 		return true;
 	}
 
-	real64 GetDeltaTime()
+	static inline real64 GetDeltaTime()
 	{
 		const Time* pcTime = GetSystem<Time>();
 		return pcTime->GetDeltaTime<std::chrono::microseconds>();

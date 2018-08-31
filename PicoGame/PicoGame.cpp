@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 
-#include "PicoEngine/PicoEngine.h"
-
 using namespace PicoEngine;
 
 namespace
@@ -17,36 +15,54 @@ namespace
 class TestObject : public GameObject
 {
 public:
-	TestObject( const std::string& _string, ClassIDType _value )
+	TestObject()
 	{
-		std::cout << "TestObject" << _string << _value << std::endl;
 	}
 	virtual ~TestObject()
 	{
-		std::cout << "Destory TestObject" << std::endl;
 	}
 
 	virtual void Update() override
 	{
-		std::cout << GetRandRangeInt(0, 100) << std::endl;
-		std::cout << GetRandReal<real64>() << std::endl;
 	}
 };
 
 class TestScene : public IScene
 {
 public:
-	TestScene(){}
+	TestScene()
+		: IScene()
+		, m_uCount( 0 )
+	{
+	}
 	virtual ~TestScene(){}
 
 	virtual void Initialize() override
 	{
-		CreateGameObject<TestObject>( strTest, ClassID<TestObject>::Get() );
+		for( uint64 ii = 0; ii < 100; ++ii )
+		{
+			CreateGameObject<TestObject>();
+		}
 	}
 
-	virtual void Update()
+	virtual void Update() override
 	{
+		std::cout << "Delta Time, " << GetDeltaTime() << std::endl;
+
+		++m_uCount;
+		if( 10 < m_uCount )
+		{
+			ChangeScene<TestScene>();
+		}
 	}
+
+	virtual void Finalize() override
+	{
+		DestroyAllGameObject();
+	}
+
+private:
+	uint64 m_uCount;
 };
 
 int main()

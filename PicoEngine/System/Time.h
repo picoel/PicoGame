@@ -7,32 +7,32 @@
 namespace PicoEngine
 {
 	template<class Duration>
-	real64 ConvertToSecond( uint64 _time )
+	static inline real64 ConvertToSecond( uint64 _time )
 	{
 		static_assert( false, "undefined template." );
 		return static_cast<real64>( _time );
 	}
 
 	template<>
-	real64 ConvertToSecond<std::chrono::seconds>( uint64 _time )
+	static inline real64 ConvertToSecond<std::chrono::seconds>( uint64 _time )
 	{
 		return static_cast<real64>( _time );
 	}
 
 	template<>
-	real64 ConvertToSecond<std::chrono::milliseconds>( uint64 _time )
+	static inline real64 ConvertToSecond<std::chrono::milliseconds>( uint64 _time )
 	{
 		return static_cast<real64>( _time ) / 1000.0f;
 	}
 
 	template<>
-	real64 ConvertToSecond<std::chrono::microseconds>( uint64 _time )
+	static inline real64 ConvertToSecond<std::chrono::microseconds>( uint64 _time )
 	{
 		return static_cast<real64>( _time ) / ( 1000.0f * 1000.0f );
 	}
 
 	template<>
-	real64 ConvertToSecond<std::chrono::nanoseconds>( uint64 _time )
+	static inline real64 ConvertToSecond<std::chrono::nanoseconds>( uint64 _time )
 	{
 		return static_cast<real64>( _time ) / ( 1000.0f * 1000.0f * 1000.0f );
 	}

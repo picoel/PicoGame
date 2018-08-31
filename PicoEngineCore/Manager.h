@@ -139,7 +139,7 @@ namespace PicoEngine
 	};
 
 	template<class T>
-	T* GetSystem()
+	static inline T* GetSystem()
 	{
 		Manager* pcManager = Singleton<Manager>::GetInstance();
 		if( pcManager == nullptr )

@@ -24,6 +24,11 @@ namespace PicoEngine
 		{
 			if( m_pcNext )
 			{
+				if( m_pcCurrent )
+				{
+					m_pcCurrent->Finalize();
+					m_pcCurrent.reset();
+				}
 				m_pcCurrent = std::move( m_pcNext );
 				m_pcCurrent->Initialize();
 			}

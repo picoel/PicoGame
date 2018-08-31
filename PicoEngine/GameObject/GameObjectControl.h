@@ -17,25 +17,55 @@ namespace PicoEngine
 		}
 		virtual ~GameObjectControl()
 		{
-			lock_guard<shared_mutex> lock( m_mutexObjList );
-			for( auto& rpcObj : m_pcObjList )
-			{
-				SafeDelete( rpcObj );
-			}
+			RemoveAllObject();
 		}
 
 	public:
 		void AddRequestGameObject( GameObject* _pObj )
 		{
+			assert( _pObj );
+			if( _pObj == nullptr )
+			{
+				return;
+			}
+
 			lock_guard<mutex> lock( m_mutexAddObjQue );
 			m_pcAddObjQue.push_back( _pObj );
 		}
 
 		void RemoveRequestObject( GameObject* _pObj )
 		{
+			assert( _pObj );
+			if( _pObj == nullptr )
+			{
+				return;
+			}
+
 			lock_guard<mutex> lock( m_mutexDelObjQue );
-			_pObj->SetMarkDelete();
 			m_pcDelObjQue.push_back( _pObj );
+		}
+
+		bool RemoveAllObject()
+		{
+			lock_guard<shared_mutex> lock1( m_mutexObjList );
+			lock_guard<mutex> lock2( m_mutexAddObjQue );
+			lock_guard<mutex> lock3( m_mutexDelObjQue );
+
+			for( auto& rpcObj : m_pcObjList )
+			{
+				SafeDeleteGameObject( rpcObj );
+			}
+			m_pcObjList.clear();
+
+			for( auto& rpcObj : m_pcAddObjQue )
+			{
+				SafeDeleteGameObject( rpcObj );
+			}
+			m_pcAddObjQue.clear();
+
+			m_pcDelObjQue.clear();
+
+			return true;
 		}
 
 		virtual void LoopFirst() override {}
@@ -44,19 +74,7 @@ namespace PicoEngine
 		{
 			DeleteObject();
 			AddObject();
-
-			{
-				shared_lock<shared_mutex> lock( m_mutexObjList );
-				for( auto& rpcObj : m_pcObjList )
-				{
-					if( rpcObj->IsMarkedDelete() )
-					{
-						continue;
-					}
-
-					rpcObj->Update();
-				}
-			}
+			UpdateObject();
 		}
 
 		virtual void LoopLast() override {}
@@ -86,20 +104,34 @@ namespace PicoEngine
 			lock_guard<shared_mutex> lock1( m_mutexObjList );
 			lock_guard<mutex> lock2( m_mutexDelObjQue );
 
-			bool bDeleted = false;
 			while( !m_pcDelObjQue.empty() )
 			{
 				GameObject* pcObj = m_pcDelObjQue.front();
 				m_pcDelObjQue.pop_front();
-				m_pcObjList.remove( pcObj );
-				SafeDelete( pcObj );
-
-				bDeleted = true;
+				if( pcObj )
+				{
+					auto itFind = std::find( m_pcObjList.begin(), m_pcObjList.end(), pcObj );
+					
+					if( itFind != m_pcObjList.end() )
+					{
+						m_pcObjList.erase( itFind );
+						SafeDeleteGameObject( pcObj );
+					}
+				}
 			}
+		}
 
-			if( bDeleted )
+		void UpdateObject()
+		{
+			shared_lock<shared_mutex> lock( m_mutexObjList );
+			for( auto& rpcObj : m_pcObjList )
 			{
-				m_pcObjList.remove( nullptr );
+				if( rpcObj->IsDestroyed() )
+				{
+					continue;
+				}
+
+				rpcObj->Update();
 			}
 		}
 

@@ -3,8 +3,20 @@
 
 namespace PicoEngine
 {
+	template<class T>
+	static inline bool IsValidHandle( const GameObjectHandle<T>& _rHandle )
+	{
+		bool ret = false;
+		const GameObjectControl* pcControl = GetSystem<GameObjectControl>();
+		if( pcControl )
+		{
+			ret = pcControl->IsExistObject( *_rHandle );
+		}
+		return ret;
+	}
+
 	template<class T, class... Args>
-	GameObjectHandle<T> CreateGameObject( Args&&... args )
+	static inline GameObjectHandle<T> CreateGameObject( Args&&... args )
 	{
 		T* pcObj = new T( args... );
 		GameObjectHandle<T> handle( pcObj );
@@ -19,39 +31,51 @@ namespace PicoEngine
 	}
 
 	template<class T>
-	bool DestoryGameObject( GameObjectHandle<T>& _rHandle )
+	static inline bool DestoryGameObject( GameObjectHandle<T>& _rHandle )
 	{
+		if( !IsValidHandle( _rHandle ) )
+		{
+			_rHandle.Invalid();
+			return false;
+		}
+
+		GameObject* pcObj = *_rHandle;
+		_rHandle.Invalid();
+		if( pcObj == nullptr )
+		{
+			return false;
+		}
+
+		DestroyGameObject( pcObj );
+
 		GameObjectControl* pcControl = GetSystem<GameObjectControl>();
 		if( pcControl )
 		{
-			pcControl->RemoveRequestObject( *_rHandle );
+			pcControl->RemoveRequestObject( pcObj );
 		}
 		else
 		{
-			GameObject* pcObj = *_rHandle;
 			SafeDelete( pcObj );	// failsafe
 		}
 
-		_rHandle.Invalid();
 		return true;
 	}
 
-	template<class T>
-	bool SuicideGameObject( T* _pcObj )
+	static inline bool DestroyAllGameObject()
 	{
-		GameObjectHandle<T> temp( _pcObj );
-		return DestoryGameObject( temp );
+		GameObjectControl* pcControl = GetSystem<GameObjectControl>();
+		if( pcControl == nullptr )
+		{
+			return false;
+		}
+
+		return pcControl->RemoveAllObject();
 	}
 
 	template<class T>
-	bool IsValidHandle( const GameObjectHandle<T>& _rHandle )
+	static inline bool SuicideGameObject( T* _pcObj )
 	{
-		bool ret = false;
-		const GameObjectControl* pcControl = GetSystem<GameObjectControl>();
-		if( pcControl )
-		{
-			ret = pcControl->IsExistObject( *_rHandle );
-		}
-		return ret;
+		GameObjectHandle<T> temp( _pcObj );
+		return DestoryGameObject( temp );
 	}
 }
