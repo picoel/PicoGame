@@ -7,6 +7,9 @@
     <Filter Include="System">
       <UniqueIdentifier>{717562b2-7be1-4162-a4bb-c0157878b273}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{32bfee66-a788-4c18-9b02-57e5647b75df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util\ClassID.h">
@@ -30,6 +33,9 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Util\Util.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Random.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

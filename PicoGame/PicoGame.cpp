@@ -28,7 +28,8 @@ public:
 
 	virtual void Update() override
 	{
-		std::cout << GetDeltaTime() << std::endl;
+		std::cout << GetRandRangeInt(0, 100) << std::endl;
+		std::cout << GetRandReal<real64>() << std::endl;
 	}
 };
 

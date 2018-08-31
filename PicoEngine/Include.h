@@ -8,6 +8,8 @@
 #include "PicoEngineCore/Util/Util.h"
 #include "PicoEngineCore/Util/ClassID.h"
 
+#include "PicoEngineCore/Math/Random.h"
+
 #include "PicoEngine/Memory/Allocator.h"
 
 #include "PicoEngineCore/Util/List.h"

@@ -25,7 +25,7 @@ namespace PicoEngine
 		return true;
 	}
 
-	float64 GetDeltaTime()
+	real64 GetDeltaTime()
 	{
 		const Time* pcTime = GetSystem<Time>();
 		return pcTime->GetDeltaTime<std::chrono::microseconds>();

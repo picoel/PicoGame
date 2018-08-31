@@ -7,34 +7,34 @@
 namespace PicoEngine
 {
 	template<class Duration>
-	float64 ConvertToSecond( uint64 _time )
+	real64 ConvertToSecond( uint64 _time )
 	{
 		static_assert( false, "undefined template." );
-		return static_cast<float64>( _time );
+		return static_cast<real64>( _time );
 	}
 
 	template<>
-	float64 ConvertToSecond<std::chrono::seconds>( uint64 _time )
+	real64 ConvertToSecond<std::chrono::seconds>( uint64 _time )
 	{
-		return static_cast<float64>( _time );
+		return static_cast<real64>( _time );
 	}
 
 	template<>
-	float64 ConvertToSecond<std::chrono::milliseconds>( uint64 _time )
+	real64 ConvertToSecond<std::chrono::milliseconds>( uint64 _time )
 	{
-		return static_cast<float64>( _time ) / 1000.0f;
+		return static_cast<real64>( _time ) / 1000.0f;
 	}
 
 	template<>
-	float64 ConvertToSecond<std::chrono::microseconds>( uint64 _time )
+	real64 ConvertToSecond<std::chrono::microseconds>( uint64 _time )
 	{
-		return static_cast<float64>( _time ) / ( 1000.0f * 1000.0f );
+		return static_cast<real64>( _time ) / ( 1000.0f * 1000.0f );
 	}
 
 	template<>
-	float64 ConvertToSecond<std::chrono::nanoseconds>( uint64 _time )
+	real64 ConvertToSecond<std::chrono::nanoseconds>( uint64 _time )
 	{
-		return static_cast<float64>( _time ) / ( 1000.0f * 1000.0f * 1000.0f );
+		return static_cast<real64>( _time ) / ( 1000.0f * 1000.0f * 1000.0f );
 	}
 
 	class Time : public ISystem
@@ -60,7 +60,7 @@ namespace PicoEngine
 		virtual void LoopLast() override {}
 
 		template<class Duration>
-		float64 GetDeltaTime() const
+		real64 GetDeltaTime() const
 		{
 			const uint64 delta = std::chrono::duration_cast<Duration>( m_tpLoopFirst - m_tpPreLoopFirst ).count();
 			return ConvertToSecond<Duration>( delta );
