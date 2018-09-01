@@ -24,6 +24,15 @@ public:
 
 	virtual void Update() override
 	{
+		RequestTask<void>( 
+			[]()
+			{
+				uint64 rand = GetRandRangeInt( 1, 100 );
+				std::this_thread::sleep_for( std::chrono::milliseconds( rand ) );
+				CreateGameObject<TestObject>(); 
+			} 
+		);
+		SuicideGameObject( this );
 	}
 };
 
@@ -32,7 +41,6 @@ class TestScene : public IScene
 public:
 	TestScene()
 		: IScene()
-		, m_uCount( 0 )
 	{
 	}
 	virtual ~TestScene(){}
@@ -48,12 +56,6 @@ public:
 	virtual void Update() override
 	{
 		std::cout << "Delta Time, " << GetDeltaTime() << std::endl;
-
-		++m_uCount;
-		if( 10 < m_uCount )
-		{
-			ChangeScene<TestScene>();
-		}
 	}
 
 	virtual void Finalize() override
@@ -61,8 +63,6 @@ public:
 		DestroyAllGameObject();
 	}
 
-private:
-	uint64 m_uCount;
 };
 
 int main()

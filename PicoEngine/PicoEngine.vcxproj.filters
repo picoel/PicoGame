@@ -16,6 +16,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{a9e68688-b517-44f8-94b5-f1a876282829}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{70e89573-0ac2-44bc-98e1-ce9ca5bb3981}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneFunc.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\WorkerThread.h">
+      <Filter>Thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

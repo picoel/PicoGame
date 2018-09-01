@@ -30,6 +30,8 @@
 #include "PicoEngine/Scene/SceneControl.h"
 #include "PicoEngine/Scene/SceneFunc.h"
 
+#include "PicoEngine/Thread/WorkerThread.h"
+
 #include "PicoEngine/System/Time.h"
 
 #include "PicoEngineCore/Manager.h"
