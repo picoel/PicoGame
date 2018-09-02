@@ -11,12 +11,11 @@
 
 namespace PicoEngine
 {
-	class WorkerThread : public ISystem
+	class WorkerThread
 	{
 	public:
 		WorkerThread( uint64 _uWorker )
-			: ISystem()
-			, m_pcWorkers()
+			: m_pcWorkers()
 			, m_pcTasks()
 			, m_mutexTasks()
 		{
@@ -49,9 +48,15 @@ namespace PicoEngine
 			return future;
 		}
 
-		virtual void LoopFirst() override {}
-		virtual void LoopMiddle() override {}
-		virtual void LoopLast() override {}
+		bool IsWait() const
+		{
+			return std::all_of(m_pcWorkers.cbegin(), m_pcWorkers.cend(), 
+				[]( const std::unique_ptr<Worker>& _rpcWorker )
+				{
+					return _rpcWorker ? _rpcWorker->IsWait() : true;
+				}
+			);
+		}
 
 	private:
 		class ITask
@@ -121,7 +126,7 @@ namespace PicoEngine
 				}
 			}
 
-			bool IsWait()
+			bool IsWait() const
 			{
 				return m_bWait;
 			}
@@ -167,4 +172,50 @@ namespace PicoEngine
 		m_func();
 		m_promise.set_value();
 	}
+
+	class WorkerThreadSystem : public ISystem
+	{
+	public:
+		WorkerThreadSystem( uint64 _uWorkers )
+			: ISystem()
+			, m_cWorkerThread( _uWorkers )
+		{
+		}
+		virtual ~WorkerThreadSystem()
+		{
+		}
+
+		template<typename T>
+		std::future<T> Request( std::function<T()> _func )
+		{
+			return m_cWorkerThread.Request( _func );
+		}
+
+		virtual void LoopFirst() override{}
+		virtual void LoopMiddle() override{}
+		virtual void LoopLast() override{}
+
+	protected:
+		WorkerThread m_cWorkerThread;
+	};
+
+	class SyncWorkerThreadSystem : public WorkerThreadSystem
+	{
+	public:
+		SyncWorkerThreadSystem( uint64 _uWorkers )
+			: WorkerThreadSystem( _uWorkers )
+		{
+		}
+		virtual ~SyncWorkerThreadSystem()
+		{
+		}
+
+		virtual void LoopLast() override
+		{
+			while( !m_cWorkerThread.IsWait() )
+			{
+				std::this_thread::sleep_for( std::chrono::nanoseconds( 100 ) );
+			}
+		}
+	};
 }

@@ -13,7 +13,8 @@ namespace PicoEngine
 		}
 
 		pcManager->RegisterSystem<Time>();
-		pcManager->RegisterSystem<WorkerThread>(4);
+		pcManager->RegisterSystem<WorkerThreadSystem>( 4 );
+		pcManager->RegisterSystem<SyncWorkerThreadSystem>( 4 );
 		pcManager->RegisterSystem<SceneControl>();
 		pcManager->RegisterSystem<GameObjectControl>();
 
@@ -29,14 +30,27 @@ namespace PicoEngine
 	template<typename T>
 	std::future<T> RequestTask( std::function<T()> _func )
 	{
-		WorkerThread* pcWorkerThread = GetSystem<WorkerThread>();
-		assert( pcWorkerThread );
-		if( pcWorkerThread == nullptr )
+		WorkerThreadSystem* pcWorkerThreadSystem = GetSystem<WorkerThreadSystem>();
+		assert( pcWorkerThreadSystem );
+		if( pcWorkerThreadSystem == nullptr )
 		{
 			return std::future<T>();
 		}
 
-		return pcWorkerThread->Request( _func );
+		return pcWorkerThreadSystem->Request( _func );
+	}
+
+	template<typename T>
+	std::future<T> RequestSyncTask( std::function<T()> _func )
+	{
+		WorkerThreadSystem* pcWorkerThreadSystem = GetSystem<SyncWorkerThreadSystem>();
+		assert( pcWorkerThreadSystem );
+		if( pcWorkerThreadSystem == nullptr )
+		{
+			return std::future<T>();
+		}
+
+		return pcWorkerThreadSystem->Request( _func );
 	}
 
 	static inline real64 GetDeltaTime()
